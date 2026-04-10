@@ -31,6 +31,8 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://dr-ayman.vercel.app",
+      "https://ayman-elgamal.vercel.app",
+      "https://ayman-elgamal-git-main-mostafa-sarhans-projects.vercel.app"
     ],
     credentials: true,
   })
