@@ -6,7 +6,6 @@ import http from "http";
 import dotenv from "dotenv";
 import { Server } from "socket.io";
 
-// Routes
 import patientRoutes from "./routes/patient.js";
 import scheduleRoutes from "./routes/schedule.js";
 import bookingRoutes from "./routes/booking.js";
@@ -17,23 +16,27 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔥 Socket server
+// ================= HTTP + Socket =================
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "*", // ممكن نضيّقها بعدين
   },
 });
 
 // ================= Middleware =================
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://dr-ayman.vercel.app" // بعد ما تعمل deploy للفرونت
-  ],
-  credentials: true
-}));app.use(express.json());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://dr-ayman.vercel.app",
+    ],
+    credentials: true,
+  })
+);
+
+app.use(express.json());
 
 // ================= Socket =================
 app.set("io", io);
@@ -46,24 +49,23 @@ io.on("connection", (socket) => {
   });
 });
 
-// ================= DB CONNECTION (FIXED) =================
+// ================= DB =================
 mongoose
-  .connect(process.env.MONGO_URI as string)
+  .connect(process.env.MONGO_URI!)
   .then(() => console.log("MongoDB connected! ✅"))
   .catch((err) => console.error("Mongo Error:", err));
 
-// ================= ROOT =================
+// ================= ROUTES =================
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-// ================= ROUTES =================
 app.use("/patients", patientRoutes);
 app.use("/schedule", scheduleRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/auth", authRoutes);
 
-// ================= START SERVER =================
+// ================= START =================
 server.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
