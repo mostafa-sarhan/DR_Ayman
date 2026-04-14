@@ -33,7 +33,7 @@ app.use(
       "https://dr-ayman.vercel.app",
       "https://ayman-elgamal.vercel.app",
       "https://ayman-elgamal-git-main-mostafa-sarhans-projects.vercel.app",
-      "https://mostafa-sarhan.github.io/ashraf_abas"
+      "https://ashraf-abas-11lm000ah-mostafa-sarhans-projects.vercel.app"
     ],
     credentials: true,
   })
