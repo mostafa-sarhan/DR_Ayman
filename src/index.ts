@@ -32,7 +32,8 @@ app.use(
       "http://localhost:5173",
       "https://dr-ayman.vercel.app",
       "https://ayman-elgamal.vercel.app",
-      "https://ayman-elgamal-git-main-mostafa-sarhans-projects.vercel.app"
+      "https://ayman-elgamal-git-main-mostafa-sarhans-projects.vercel.app",
+      "https://mostafa-sarhan.github.io/ashraf_abas"
     ],
     credentials: true,
   })
